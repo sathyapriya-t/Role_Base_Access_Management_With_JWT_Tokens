@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Iterable<Product> addAllProduct(){
         return service.addAllProduct();
     }
