@@ -40,7 +40,7 @@ public class SpringConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
-                        authorizationManagerRequestMatcherRegistry.requestMatchers("/welcome", "/register").permitAll())
+                        authorizationManagerRequestMatcherRegistry.requestMatchers("/welcome", "/register","/authenticate").permitAll())
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry.requestMatchers("/get/**", "/users").authenticated())
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
