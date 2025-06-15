@@ -29,6 +29,12 @@ public class SpringConfig {
     @Autowired
     JWTFilter jwtFilter;
 
+    @Autowired
+    CustomAuthenticationEntryPoint authenticationEntryPoint;
+
+    @Autowired
+    CustomAccessDeniedHandler accessDeniedHandler;
+
     //Authentication -> user details service
     //Authority -> should match excatly
     @Bean
@@ -54,6 +60,7 @@ public class SpringConfig {
                         authorizationManagerRequestMatcherRegistry.requestMatchers("/all").authenticated())
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry.requestMatchers("/add").hasAnyRole("ADMIN", "USER"))
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler))
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement( httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(daoAuthenticationProvider())
