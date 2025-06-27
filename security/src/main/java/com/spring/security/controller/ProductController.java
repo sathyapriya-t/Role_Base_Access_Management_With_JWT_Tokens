@@ -23,7 +23,7 @@ public class ProductController {
     //@PreAuthorize("hasRole('ADMIN')")
     //@PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasAuthority('EXECUTE_PRIVILEGE')")
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
-        return new ResponseEntity<>(service.addProduct(product),HttpStatus.OK);
+        return ResponseEntity.ok(service.addProduct(product));
     }
 
     @GetMapping("/all")

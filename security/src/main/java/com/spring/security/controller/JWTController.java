@@ -25,7 +25,7 @@ public class JWTController {
     public String authenticateAndGenerateToken(@RequestBody RequestHeader requestHeader){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestHeader.getUsername(), requestHeader.getPassword()));
         if(authentication.isAuthenticated())
-            return service.generateToken(requestHeader.getUsername());
+            return service.generateToken(requestHeader.getUsername(),null);
         throw new UsernameNotFoundException("Username not found");
     }
 }
